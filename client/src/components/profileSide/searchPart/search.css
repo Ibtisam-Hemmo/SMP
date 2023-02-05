@@ -1,0 +1,32 @@
+.searchSide{
+    display: flex;
+    gap: 0.75rem;
+}
+
+.search{
+    display: flex;
+    align-items: center;
+    background-color: var(--inputColor);
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.search>input{
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.searchIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(98.63deg, #80558C 0%, #E4D192 100%);
+    border-radius: 5px;
+    padding: 7px;
+    color: white;
+}
+
+.searchIcon:hover{
+    cursor: pointer;
+}
