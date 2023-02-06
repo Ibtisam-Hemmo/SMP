@@ -1,6 +1,6 @@
 import React from "react";
 
-import Post from "./post/Post";
+import Post from "./posts/Posts";
 import Share from "./postShare/Share";
 import "./postSide.css";
 

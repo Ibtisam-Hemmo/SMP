@@ -17,6 +17,10 @@
   --shedable: #e1ae4a;
 }
 
+::-webkit-scrollbar{
+  display: none;
+}
+
 .App {
   overflow: hidden;
   color: var(--black);
