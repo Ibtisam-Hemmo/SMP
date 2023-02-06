@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import "./infoCard.css";
+
 import { GrEdit } from "react-icons/gr";
-// import ProfileModal from "../ProfileModal.jsx/ProfileModal";
+import EditModal from "../../profileSide/editProfileModal/EditModal";
+import "./infoCard.css";
 
 const InfoCard = () => {
   const [modalOpened, setModalOpened] = useState(false);
+
   return (
     <div className="infoCard">
       <div className="infoHead">
@@ -15,10 +17,10 @@ const InfoCard = () => {
             height="1.2rem"
             onClick={() => setModalOpened(true)}
           />
-          {/* <ProfileModal
+          <EditModal
             modalOpened={modalOpened}
             setModalOpened={setModalOpened}
-          /> */}
+          />
         </div>
       </div>
 
