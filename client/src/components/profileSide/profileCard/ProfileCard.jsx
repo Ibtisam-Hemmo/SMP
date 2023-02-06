@@ -4,6 +4,8 @@ import Cover from "../../../assets/profileBack.jpeg";
 import Profile from "../../../assets/ibtisama.jpeg";
 
 const ProfileCard = () => {
+  const ProfilePage = true;
+
   return (
     <div className="profileCard">
       <div className="profileImages">
@@ -28,11 +30,20 @@ const ProfileCard = () => {
             <span>45</span>
             <span>following</span>
           </div>
+          {
+            ProfilePage && (
+            <>
+              <div className="vl"></div>
+              <div className="follow">
+                <span>3</span>
+                <span>Posts</span>
+              </div>
+            </>
+          )}
         </div>
         <hr />
       </div>
-
-      <span>My profile</span>
+      {ProfilePage ? "" : <span>My Profile</span>}
     </div>
   );
 };
