@@ -6,8 +6,8 @@ import postRouter from "./postRoutes.js";
 
 const router = Router();
 
-router.use(authRouter);
-router.use(userRouter);
+router.use('/auth', authRouter);
+router.use('/user', userRouter);
 router.use(postRouter);
 
 export default router;
