@@ -17,6 +17,6 @@ app.use([
 app.get('/', (req, res) => {
     res.send('Hello there!')
 })
-app.use(router);
+app.use('/api/v1', router);
 
 export default app;
