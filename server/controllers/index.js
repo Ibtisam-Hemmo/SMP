@@ -6,3 +6,6 @@ export { default as updateUser } from './users/updateUser.js'
 export { default as deleteUser } from './users/deleteUser.js'
 export { default as followUser } from './users/followUser.js'
 export { default as unFollowUser } from './users/unFollowUser.js'
+
+export { default as createPost } from './posts/createPost.js'
+export { default as getPost } from './posts/getPost.js'
