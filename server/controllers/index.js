@@ -9,3 +9,7 @@ export { default as unFollowUser } from './users/unFollowUser.js'
 
 export { default as createPost } from './posts/createPost.js'
 export { default as getPost } from './posts/getPost.js'
+export { default as updatePost } from './posts/updatePost.js'
+export { default as deletePost } from './posts/deletePost.js'
+export { default as likePost } from './posts/likePost.js'
+export { default as feed } from './posts/feed.js'
