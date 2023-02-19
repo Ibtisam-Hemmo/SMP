@@ -1,7 +1,6 @@
 import { UploadImage, SharePost } from '../apis/uploadReq.js';
 
 export const uploadImage = (data) => async (dispatch) => {
-    console.log('upload image data: ', data);
     try {
         await UploadImage(data);
     } catch (error) {
@@ -10,12 +9,11 @@ export const uploadImage = (data) => async (dispatch) => {
     }
 };
 
-export const sharePost = (data) => async (dispatch) => {
+export const sharePost = (post) => async (dispatch) => {
     dispatch({ type: 'SHARE_START' })
     try {
-        const newPost = await SharePost(data);
-        console.log('newPost: ', newPost);
-        dispatch({ type: 'SHARE_SUCCESS', data: newPost.data })
+        const { data } = await SharePost(post);
+        dispatch({ type: 'SHARE_SUCCESS', data: data })
 
     } catch (error) {
         console.log(error);
