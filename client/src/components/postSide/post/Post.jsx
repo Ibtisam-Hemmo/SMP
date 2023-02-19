@@ -18,14 +18,13 @@ const Post = ({ post }) => {
     likeStatus ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1);
   };
 
-
   return (
     <div className="post">
-
-        <img
-          src={`${window.REACT_APP_PUBLIC_FOLDER}${image}`}
-          alt="Image"
-        />
+      {image ? (
+        <img src={`${window.REACT_APP_PUBLIC_FOLDER}${image}`} alt="Image" />
+      ) : (
+        ""
+      )}
 
       <div
         className="postReact"
