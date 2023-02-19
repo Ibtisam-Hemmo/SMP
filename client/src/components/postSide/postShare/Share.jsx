@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 
 import "./share.css";
-import ProfileImg from "../../../assets/ibtisama.jpeg";
 import {
   FaShareAlt,
   FaPhotoVideo,
@@ -16,11 +15,12 @@ const Share = () => {
   const [image, setImage] = useState(null);
   const user = useSelector((state) => state.authReducer.authData);
   const loading = useSelector((state) => state.postReducer.uploading);
-  console.log("loading: ", loading);
   const ImageRef = useRef();
   const desc = useRef();
   const dispatch = useDispatch();
-
+  
+  window.REACT_APP_PUBLIC_FOLDER = "http://localhost:5000/images/";
+  
   const imageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       let postImage = event.target.files[0];
@@ -60,7 +60,7 @@ const Share = () => {
 
   return (
     <div className="share">
-      <img src={ProfileImg} alt="Profile Image" />
+        <img src={user.coverImg ? user.coverImg : window.REACT_APP_PUBLIC_FOLDER + 'user.png'} alt="Profile Image" />
       <div>
         <input
           type="text"
