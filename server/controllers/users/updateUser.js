@@ -1,9 +1,11 @@
 import { userModel } from "../../models/index.js";
 import bcryptjs from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+
 const updateUser = async (req, res) => {
     const { id } = req.params;
-    const { currentUserId, currentUserAdminStatus, password } = req.body;
-    if (id === currentUserId || currentUserAdminStatus) {
+    const { _id, currentUserAdminStatus, password } = req.body;
+    if (id === _id || currentUserAdminStatus) {
         try {
             if (password) {
                 const salt = await bcryptjs.genSalt(10);
@@ -15,6 +17,11 @@ const updateUser = async (req, res) => {
             } else {
                 res.status(404).json({ msg: 'no user is found' })
             }
+            const token = jwt.sign({
+                username: user.username,
+                id: user._id
+            }, process.env.JWT_KEY, { expiresIn: '3h' });
+
         } catch (error) {
             res.status(500).json({ msg: error.message })
         }
