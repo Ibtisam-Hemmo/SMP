@@ -5,7 +5,7 @@ import "./home.css";
 const Home = () => {
   return (
     <div className="home">
-      <ProfileSide />
+      <ProfileSide location="home page" />
       <PostSide />
       <RightSide />
     </div>

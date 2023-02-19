@@ -1,5 +1,10 @@
 import React from "react";
-import { PostSide, ProfileLeft, ProfileCard, RightSide } from "../../components";
+import {
+  PostSide,
+  ProfileLeft,
+  ProfileCard,
+  RightSide,
+} from "../../components";
 import "./profile.css";
 
 const Profile = () => {
@@ -7,11 +12,11 @@ const Profile = () => {
     <div className="profile">
       <ProfileLeft />
       <div className="profile-center">
-            <ProfileCard/>
-            <PostSide/>
-        </div>
+        <ProfileCard location="profile page" />
+        <PostSide />
+      </div>
 
-        <RightSide/>
+      <RightSide />
     </div>
   );
 };
