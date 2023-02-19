@@ -1,14 +1,27 @@
 import React from "react";
-import "./posts.css";
-import { PostsData } from "../../../TempData/tempPosts";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getFeedPosts } from "../../../actions/index.js";
+
 import Post from "../post/Post";
+import "./posts.css";
 
 const Posts = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.authReducer.authData);
+  const { posts, loading } = useSelector((state) => state.postReducer);
+
+  useEffect(() => {
+    dispatch(getFeedPosts(user._id));
+  }, []);
+
   return (
     <div className="posts">
-      {PostsData.map((post, index) => {
-        return <Post post={post} key={index} />;
-      })}
+      {loading
+        ? "Fetching Posts..."
+        : posts?.map((post, index) => {
+            return <Post post={post} key={index} />;
+          })}
     </div>
   );
 };
