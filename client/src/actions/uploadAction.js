@@ -1,6 +1,7 @@
 import { UploadImage, SharePost } from '../apis/uploadReq.js';
 
 export const uploadImage = (data) => async (dispatch) => {
+    dispatch({ type: 'UPLOAD_START' })
     try {
         await UploadImage(data);
     } catch (error) {

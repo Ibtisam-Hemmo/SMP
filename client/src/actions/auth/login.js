@@ -11,3 +11,7 @@ const login = (FormData) => async (dispatch) => {
     }
 }
 export default login; 
+
+export const logout = () => async (dispatch) =>{
+    dispatch({type:'LOG_OUT'})
+}
