@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className="home">
       <ProfileSide location="home page" />
-      <PostSide />
+      <PostSide location='home page'/>
       <RightSide />
     </div>
   );

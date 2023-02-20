@@ -14,16 +14,16 @@ const ProfileCard = ({ location }) => {
       <div className="profileImages">
         <img
           src={
-            user.coverPicture
-              ? `${window.REACT_APP_PUBLIC_FOLDER}${user.coverPicture}`
+            user?.coverPicture
+              ? `${window.REACT_APP_PUBLIC_FOLDER}${user?.coverPicture}`
               : window.REACT_APP_PUBLIC_FOLDER + "profileBack.jpeg"
           }
           alt="Cover Image"
         />
         <img
           src={
-            user.avatar
-              ? `${window.REACT_APP_PUBLIC_FOLDER}${user.avatar}`
+            user?.avatar
+              ? `${window.REACT_APP_PUBLIC_FOLDER}${user?.avatar}`
               : window.REACT_APP_PUBLIC_FOLDER + "user.png"
           }
           alt="Profile Image"
@@ -31,7 +31,7 @@ const ProfileCard = ({ location }) => {
       </div>
 
       <div className="profileName">
-        <span>{user.firstName + " " + user.lastName}</span>
+        <span>{user?.firstName + " " + user?.lastName}</span>
         <span style={{ fontSize: "12px" }}>@{user.username}</span>
       </div>
 
@@ -39,12 +39,12 @@ const ProfileCard = ({ location }) => {
         <hr />
         <div>
           <div className="follow">
-            <span>{user.followers.length}</span>
+            <span>{user?.followers?.length}</span>
             <span>followers</span>
           </div>
           <div className="vl"></div>
           <div className="follow">
-            <span>{user.following.length}</span>
+            <span>{user?.following?.length}</span>
             <span>following</span>
           </div>
           {location === "profile page" && (
@@ -66,7 +66,7 @@ const ProfileCard = ({ location }) => {
       ) : (
         <span>
           <Link
-            to={`/profile/${user._id}`}
+            to={`/profile/${user?._id}`}
             style={{ textDecoration: "none", color: "inherit" }}
           >
             My Profile

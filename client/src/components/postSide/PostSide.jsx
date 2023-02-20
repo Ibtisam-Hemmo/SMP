@@ -4,11 +4,11 @@ import Post from "./posts/Posts";
 import Share from "./postShare/Share";
 import "./postSide.css";
 
-const PostSide = () => {
+const PostSide = ({location}) => {
   return (
     <div className="postSide">
       <Share />
-      <Post />
+      <Post location={location}/>
     </div>
   );
 };

@@ -6,7 +6,7 @@ import { getFeedPosts } from "../../../actions/index.js";
 import Post from "../post/Post";
 import "./posts.css";
 
-const Posts = () => {
+const Posts = ({ location }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.authReducer.authData);
   const { posts, loading } = useSelector((state) => state.postReducer);
@@ -20,7 +20,13 @@ const Posts = () => {
       {loading
         ? "Fetching Posts..."
         : posts?.map((post, index) => {
-            return <Post post={post} key={index} />;
+            if (location === "profile page") {
+              if (post.userId === user._id) {
+                return <Post post={post} key={index} />;
+              }
+            } else {
+              return <Post post={post} key={index} />;
+            }
           })}
     </div>
   );
