@@ -22,7 +22,7 @@ const register = async (req, res) => {
             res
             .status(201)
             .cookie('token', token)
-            .json({ msg: `user ${user.username} is created successfully` })
+            .json(user)
         }
     } catch (error) {
         res.status(500).json({ msg: error.message })
