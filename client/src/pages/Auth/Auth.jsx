@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { login, signUp } from "../../actions/index.js";
@@ -19,7 +20,7 @@ const Auth = () => {
 
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.authReducer.loading);
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -28,10 +29,10 @@ const Auth = () => {
     e.preventDefault();
     if (isRegistered) {
       data.password === data.confirmPass
-        ? dispatch(signUp(data))
+        ? dispatch(signUp(data, navigate))
         : setConfirmPass(false);
     } else {
-      dispatch(login(data));
+      dispatch(login(data, navigate));
     }
   };
 
@@ -137,7 +138,11 @@ const Auth = () => {
                 ? "Already have an account? Login"
                 : "Don't have an account? Sign up"}
             </span>
-            <button className="button infoButton" type="Submit" disabled={loading}>
+            <button
+              className="button infoButton"
+              type="Submit"
+              disabled={loading}
+            >
               {loading ? "Loading ..." : isRegistered ? "SignUp" : "Login"}
             </button>
           </div>
