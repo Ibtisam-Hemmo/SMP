@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import { getUser, updateUser, deleteUser, followUser, unFollowUser } from '../controllers/index.js';
+import { getUser, updateUser, deleteUser, followUser, unFollowUser, getAllUsers } from '../controllers/index.js';
 
 const userRouter = Router();
 
 userRouter.get('/:id', getUser);
+userRouter.get('/', getAllUsers);
 userRouter.put('/:id', updateUser);
 userRouter.delete('/:id', deleteUser);
 userRouter.put('/:id/follow', followUser);
