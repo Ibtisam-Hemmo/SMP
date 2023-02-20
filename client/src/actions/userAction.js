@@ -1,4 +1,4 @@
-import { UpdateUser } from "../apis/userReduest";
+import { FollowUser, UnFollowUser, UpdateUser } from "../apis/userReduest";
 
 export const updateUser = (id, formData) => async (dispatch) => {
     dispatch({ type: "UPDATING_START" })
@@ -9,4 +9,14 @@ export const updateUser = (id, formData) => async (dispatch) => {
     catch (error) {
         dispatch({ type: "UPDATING_FAIL" })
     }
+}
+
+export const followUser = (id, data)=> async(dispatch)=> {
+    dispatch({type: "FOLLOW_USER", data: id})
+    FollowUser(id, data)
+}
+
+export const unFollowUser = (id, data)=> async(dispatch)=> {
+    dispatch({type: "UNFOLLOW_USER", data: id})
+    UnFollowUser(id, data)
 }
