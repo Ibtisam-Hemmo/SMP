@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import swal from "sweetalert";
 
 import { login, signUp } from "../../actions/index.js";
 import "./auth.css";
@@ -10,7 +11,6 @@ const Auth = () => {
     firstName: "",
     lastName: "",
     username: "",
-    email: "",
     password: "",
     confirmPass: "",
   };
@@ -27,11 +27,26 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isRegistered) {
-      data.password === data.confirmPass
-        ? dispatch(signUp(data))
-        : setConfirmPass(false);
+      if (
+        !!data.password &&
+        !!data.username &&
+        !!data.firstName &&
+        !!data.lastName &&
+        !!data.password &&
+        !!data.confirmPass
+      ) {
+        data.password === data.confirmPass
+          ? dispatch(signUp(data))
+          : setConfirmPass(false);
+      } else {
+        swal("You need to fill all the required inputs");
+      }
     } else {
-      dispatch(login(data));
+      if (!!data.password && !!data.username) {
+        dispatch(login(data));
+      } else {
+        swal("You need to fill all the required inputs");
+      }
     }
   };
 
@@ -74,17 +89,6 @@ const Auth = () => {
               className="infoInput"
               name="username"
               value={data.username}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <input
-              required
-              type="text"
-              placeholder="email"
-              className="infoInput"
-              name="email"
-              value={data.email}
               onChange={handleChange}
             />
           </div>
@@ -137,7 +141,11 @@ const Auth = () => {
                 ? "Already have an account? Login"
                 : "Don't have an account? Sign up"}
             </span>
-            <button className="button infoButton" type="Submit" disabled={loading}>
+            <button
+              className="button infoButton"
+              type="Submit"
+              disabled={loading}
+            >
               {loading ? "Loading ..." : isRegistered ? "SignUp" : "Login"}
             </button>
           </div>
