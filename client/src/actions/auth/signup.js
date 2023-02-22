@@ -1,3 +1,6 @@
+import axios from 'axios';
+import swal from 'sweetalert';
+
 import { signup } from '../../apis/authRequest.js';
 
 const signUp = (FormData) => async (dispatch) => {
@@ -6,7 +9,8 @@ const signUp = (FormData) => async (dispatch) => {
         const { data } = await signup(FormData);
         dispatch({ type: 'AUTH_SUCCESS', data: data })
     } catch (error) {
-        console.log(error)
+        if (axios.isAxiosError(error)) swal(error.response?.data?.msg);
+        else console.log('error: ', error);
         dispatch({ type: 'AUTH_FAIL' })
     }
 }
