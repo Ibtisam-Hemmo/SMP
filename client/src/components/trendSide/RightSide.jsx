@@ -14,12 +14,14 @@ const RightSide = () => {
   return (
     <div className="trendSide">
       <div className="navIcons">
-        <Link to='/home'>
+        <Link to="/home">
           <HiHome fill="rebeccapurple" />
         </Link>
         <MdOutlineNotificationsActive />
         <MdSettings />
-        <FaRegCommentDots />
+        <Link to="/chat">
+          <FaRegCommentDots />
+        </Link>
       </div>
       <TrendCard />
       <button
