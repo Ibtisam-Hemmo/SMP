@@ -14,3 +14,10 @@ export { default as updatePost } from './posts/updatePost.js'
 export { default as deletePost } from './posts/deletePost.js'
 export { default as likePost } from './posts/likePost.js'
 export { default as feed } from './posts/feed.js'
+
+export { default as createChat } from './chat/createChat.js'
+export { default as userChats } from './chat/userChats.js'
+export { default as getChat } from './chat/getChat.js'
+
+export { default as addMsg } from './msg/addMsg.js'
+export { default as getMsg } from './msg/getMsg.js'
