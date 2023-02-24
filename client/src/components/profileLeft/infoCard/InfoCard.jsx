@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { GrEdit } from "react-icons/gr";
 import EditModal from "../../profileSide/editProfileModal/EditModal";
 import "./infoCard.css";
@@ -14,6 +14,7 @@ const InfoCard = () => {
   const profileUserId = params.id;
   const [profileUser, setProfileUser] = useState({});
   const user = useSelector((state) => state.authReducer.authData);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfileUser = async () => {
@@ -29,6 +30,7 @@ const InfoCard = () => {
 
   const handleLogout = () => {
     dispatch(logout());
+    navigate('/')
   };
 
   return (
