@@ -1,10 +1,10 @@
 import { chatModel } from '../../models/index.js';
 
 const createChat = async (req, res) => {
-    const { senderId, receiverId } = req.body;
+    const { userId, id } = req.body;
 
     const newChat = new chatModel({
-        members: [senderId, receiverId],
+        members: [userId, id],
     });
 
     try {
