@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 
-import "./App.css";
 import { Profile, Home, Auth } from "./pages";
 import Chat from "./pages/chat/Chat";
+import "./App.css";
 
 function App() {
   const user = useSelector((state) => state.authReducer.authData);

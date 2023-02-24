@@ -1,4 +1,5 @@
 import React from "react";
+
 import { FollowersCard, Search } from "../index";
 import InfoCard from './infoCard/InfoCard'
 

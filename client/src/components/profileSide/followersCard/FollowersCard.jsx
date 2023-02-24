@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getAllUsers } from "../../../apis/userReduest";
 
+import { getAllUsers } from "../../../apis/userRequest";
 import User from "../user/User";
 import "./followersCard.css";
 

@@ -1,28 +1,22 @@
-import React, { useState } from "react";
-import "./post.css";
-import { FaRegCommentDots, FaHeart, FaRegHeart, FaShare } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { likePost } from "../../../apis/feedRequest";
-import { useEffect } from "react";
-import { getUser } from "../../../apis/userReduest";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { format } from "timeago.js";
+import { FaRegCommentDots, FaHeart, FaRegHeart, FaShare } from "react-icons/fa";
+
+import { likePost } from "../../../apis/feedRequest";
+import { getUser } from "../../../apis/userRequest";
+import "./post.css";
 
 const Post = ({ post }) => {
+
   const { image, desc, likes, _id, userId, createdAt } = post;
-
-  window.REACT_APP_PUBLIC_FOLDER = "http://localhost:5000/images/";
-
+  
   const user = useSelector((state) => state.authReducer.authData);
   const [likeStatus, setLiked] = useState(likes.includes(user._id));
   const [likesNo, setLikes] = useState(likes.length);
   const [person, setPerson] = useState({});
   const [loading, setLoading] = useState(true);
-
-  const handleLike = () => {
-    likePost(_id, user._id);
-    setLiked((prev) => !prev);
-    likeStatus ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1);
-  };
+  
   window.REACT_APP_PUBLIC_FOLDER = "http://localhost:5000/images/";
 
   useEffect(() => {
@@ -37,6 +31,13 @@ const Post = ({ post }) => {
     };
     fetchUser();
   }, []);
+
+  const handleLike = () => {
+    likePost(_id, user._id);
+    setLiked((prev) => !prev);
+    likeStatus ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1);
+  };
+  
   if (loading) return <p>Post is still loading</p>;
   return (
     <div className="post">

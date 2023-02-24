@@ -1,7 +1,7 @@
 import React from "react";
-import "./trendCard.css";
 
-import { TrendData } from "../../../TempData/tempTrends";
+import { TrendData } from "../../../assets/tempData/tempTrends.js";
+import "./trendCard.css";
 const TrendCard = () => {
   return (
     <div className="trendCard">

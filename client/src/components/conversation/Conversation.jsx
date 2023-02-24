@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import { getUser } from "../../apis/userReduest";
+import { getUser } from "../../apis/userRequest";
 
 const Conversation = ({ data, currentUser, online }) => {
   const [userData, setUserData] = useState(null);
@@ -20,7 +20,6 @@ const Conversation = ({ data, currentUser, online }) => {
         console.log(error);
       }
     };
-
     getUserData();
   }, []);
 

@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { GrEdit } from "react-icons/gr";
+
 import EditModal from "../../profileSide/editProfileModal/EditModal";
-import "./infoCard.css";
-import { getUser } from "../../../apis/userReduest";
+import { getUser } from "../../../apis/userRequest";
 import { logout } from "../../../actions/auth/login";
+import "./infoCard.css";
 
 const InfoCard = () => {
   const [modalOpened, setModalOpened] = useState(false);

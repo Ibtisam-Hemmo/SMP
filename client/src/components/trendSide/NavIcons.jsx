@@ -1,9 +1,10 @@
 import React from "react";
-import "./rightSide.css";
+import { Link } from "react-router-dom";
 import { MdOutlineNotificationsActive, MdSettings } from "react-icons/md";
 import { HiHome } from "react-icons/hi";
 import { FaRegCommentDots } from "react-icons/fa";
-import { Link } from "react-router-dom";
+
+import "./rightSide.css";
 
 const NavIcons = () => {
   return (
