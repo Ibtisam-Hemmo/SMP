@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { followUser, unFollowUser } from "../../../actions/userAction.js";
 
 const User = ({ follower }) => {
   const { firstName, lastName, username, avatar, _id, followers } = follower;
   window.REACT_APP_PUBLIC_FOLDER = "http://localhost:5000/images/";
-  const  user  = useSelector((state) => state.authReducer.authData);
+  const user = useSelector((state) => state.authReducer.authData);
   const dispatch = useDispatch();
-  
+
   const [following, setFollowing] = useState(followers.includes(user._id));
 
   const handleFollow = () => {
@@ -19,15 +20,18 @@ const User = ({ follower }) => {
   return (
     <div className="follower">
       <div>
-        <img
-          src={
-            avatar
-              ? `${window.REACT_APP_PUBLIC_FOLDER}${avatar}`
-              : window.REACT_APP_PUBLIC_FOLDER + "user.png"
-          }
-          alt=""
-          className="followerImg"
-        />
+        <Link to={`/profile/${_id}`}>
+          <img
+            src={
+              avatar
+                ? `${window.REACT_APP_PUBLIC_FOLDER}${avatar}`
+                : window.REACT_APP_PUBLIC_FOLDER + "user.png"
+            }
+            alt=""
+            className="followerImg"
+          />
+        </Link>
+
         <div className="name">
           <span>
             {firstName} {lastName}
@@ -35,14 +39,17 @@ const User = ({ follower }) => {
           <span>@{username}</span>
         </div>
       </div>
-<button
+      <button
         className={
-          following ? "button follow-button UnfollowButton" : "button follow-button"
+          following
+            ? "button follow-button UnfollowButton"
+            : "button follow-button"
         }
         onClick={handleFollow}
       >
         {following ? "UnFollow" : "Follow"}
-      </button>    </div>
+      </button>{" "}
+    </div>
   );
 };
 

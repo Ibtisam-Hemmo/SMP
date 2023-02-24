@@ -110,9 +110,10 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
               />
             </div>
             <div className="chat-body">
-              {messages.map((message) => (
+              {messages.map((message, index) => (
                 <>
                   <div
+                    key={index}
                     ref={scroll}
                     className={
                       message.senderId === currentUser
