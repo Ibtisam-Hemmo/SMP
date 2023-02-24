@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { FaRegCommentDots } from "react-icons/fa";
 
 import "./profileCard.css";
 import { getUser } from "../../../apis/userReduest";
+import { createChat } from "../../../apis/chatRequest";
 
 const ProfileCard = ({ location }) => {
+  
   const [person, setPerson] = useState({});
   const [loading, setLoading] = useState(true);
 
   const user = useSelector((state) => state.authReducer.authData);
   const posts = useSelector((state) => state.postReducer.posts);
+  const navigate = useNavigate();
   const params = useParams();
   const { id } = params;
   window.REACT_APP_PUBLIC_FOLDER = "http://localhost:5000/images/";
@@ -27,6 +31,19 @@ const ProfileCard = ({ location }) => {
     };
     fetchUser();
   }, [id]);
+
+  const handleChat = () => {
+    const chat = async () => {
+      try {
+        const data = { userId: user._id, id: id };
+        await createChat(data);
+        navigate("/chat", { replace: true });
+      } catch (error) {
+        console.log("error: ", error);
+      }
+    };
+    chat();
+  };
 
   if (loading) return <p> Data is still loading </p>;
 
@@ -50,6 +67,19 @@ const ProfileCard = ({ location }) => {
           alt="Profile Image"
         />
       </div>
+      {user._id === id || location == "home page" ? (
+        " "
+      ) : (
+        <FaRegCommentDots
+          onClick={handleChat}
+          fontSize="22px"
+          style={{
+            alignSelf: "end",
+            marginRight: "45px",
+            cursor: "pointer",
+          }}
+        />
+      )}
 
       <div className="profileName">
         <span>{person?.firstName + " " + person?.lastName}</span>
@@ -72,9 +102,7 @@ const ProfileCard = ({ location }) => {
             <>
               <div className="vl"></div>
               <div className="follow">
-                <span>
-                  {posts.filter((post) => post.userId === id).length}
-                </span>
+                <span>{posts.filter((post) => post.userId === id).length}</span>
                 <span>Posts</span>
               </div>
             </>
