@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom'
 import swal from "sweetalert";
 
 import { login, signUp } from "../../actions/index.js";
@@ -19,6 +20,7 @@ const Auth = () => {
 
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.authReducer.loading);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
@@ -36,14 +38,14 @@ const Auth = () => {
         !!data.confirmPass
       ) {
         data.password === data.confirmPass
-          ? dispatch(signUp(data))
+          ? dispatch(signUp(data, navigate))
           : setConfirmPass(false);
       } else {
         swal("You need to fill all the required inputs");
       }
     } else {
       if (!!data.password && !!data.username) {
-        dispatch(login(data));
+        dispatch(login(data, navigate));
       } else {
         swal("You need to fill all the required inputs");
       }
