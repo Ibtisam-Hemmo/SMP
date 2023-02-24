@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { getFeedPosts } from "../../../actions/index.js";
 
 import Post from "../post/Post";
@@ -10,10 +11,12 @@ const Posts = ({ location }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.authReducer.authData);
   const { posts, loading } = useSelector((state) => state.postReducer);
+  const params = useParams();
+  const { id } = params;
 
   useEffect(() => {
-    dispatch(getFeedPosts(user._id));
-  }, []);
+    dispatch(getFeedPosts(!!id ? id : user._id));
+  }, [id, user._id ]);
 
   return (
     <div className="posts">
@@ -21,7 +24,7 @@ const Posts = ({ location }) => {
         ? "Fetching Posts..."
         : posts?.map((post, index) => {
             if (location === "profile page") {
-              if (post.userId === user._id) {
+              if (post.userId === id) {
                 return <Post post={post} key={index} />;
               }
             } else {
