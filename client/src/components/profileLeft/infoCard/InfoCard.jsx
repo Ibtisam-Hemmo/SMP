@@ -20,12 +20,12 @@ const InfoCard = () => {
       if (profileUserId === user._id) {
         setProfileUser(user);
       } else {
-        const profileUser = await getUser(profileUserId);
-        setProfileUser(profileUser.data);
+        const { data } = await getUser(profileUserId);
+        setProfileUser(data);
       }
     };
     fetchProfileUser();
-  }, [user]);
+  }, [profileUserId]);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -56,7 +56,9 @@ const InfoCard = () => {
           <b>Status </b>
         </span>
         <span>
-          {user.relationship ? user.relationship : "Enter your status"}
+          {profileUser.relationship
+            ? profileUser.relationship
+            : "Enter your status"}
         </span>
       </div>
 
@@ -64,19 +66,28 @@ const InfoCard = () => {
         <span>
           <b>Lives in </b>
         </span>
-        <span>{user.location ? user.location : "Enter your location"}</span>
+        <span>
+          {profileUser.location ? profileUser.location : "Enter your location"}
+        </span>
       </div>
 
       <div className="info">
         <span>
           <b>Works at </b>
         </span>
-        <span>{user.working ? user.working : "Enter your working place"}</span>
+        <span>
+          {profileUser.working
+            ? profileUser.working
+            : "Enter your working place"}
+        </span>
       </div>
-
-      <button className="button logout-button" onClick={handleLogout}>
-        Logout
-      </button>
+      {profileUserId === user._id ? (
+        <button className="button logout-button" onClick={handleLogout}>
+          Logout
+        </button>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
