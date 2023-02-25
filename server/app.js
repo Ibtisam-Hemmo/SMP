@@ -7,9 +7,9 @@ import url from 'url';
 
 import router from './routes/index.js';
 import { errorMiddleware } from './middlewares/index.js'
-dotenv.config();
 
 const app = express();
+dotenv.config();
 
 const port = process.env.PORT || 5050;
 app.set('port', port);
@@ -23,7 +23,6 @@ app.use([
     cors(),
     express.json(),
 ]);
-
 
 app.use(errorMiddleware)
 app.use('/api/v1', router);
