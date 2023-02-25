@@ -8,7 +8,6 @@ import { login, signUp } from "../../actions/index.js";
 import "./auth.css";
 
 const Auth = () => {
-  const [isRegistered, setIsRegistered] = useState(false);
   const initialState = {
     firstName: "",
     lastName: "",
@@ -16,11 +15,13 @@ const Auth = () => {
     password: "",
     confirmPass: "",
   };
+
+  const [isRegistered, setIsRegistered] = useState(false);
   const [data, setData] = useState(initialState);
   const [confirmPass, setConfirmPass] = useState(true);
 
-  const dispatch = useDispatch();
   const loading = useSelector((state) => state.authReducer.loading);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });

@@ -1,23 +1,26 @@
 import React, { useState, useRef } from "react";
-import swal from "sweetalert";
-import "./share.css";
+import { useDispatch, useSelector } from "react-redux";
+import { GrClose } from "react-icons/gr";
 import {
   FaShareAlt,
   FaPhotoVideo,
   FaLocationArrow,
   FaVideo,
 } from "react-icons/fa";
-import { GrClose } from "react-icons/gr";
-import { useDispatch, useSelector } from "react-redux";
+import swal from "sweetalert";
+
 import { sharePost, uploadImage } from "../../../actions/uploadAction.js";
+import "./share.css";
 
 const Share = () => {
   const [image, setImage] = useState(null);
-  const user = useSelector((state) => state.authReducer.authData);
-  const loading = useSelector((state) => state.postReducer.uploading);
+
   const ImageRef = useRef();
   const desc = useRef();
   const dispatch = useDispatch();
+  
+  const user = useSelector((state) => state.authReducer.authData);
+  const loading = useSelector((state) => state.postReducer.uploading);
 
   window.REACT_APP_PUBLIC_FOLDER = "http://localhost:5000/images/";
 

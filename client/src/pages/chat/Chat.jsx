@@ -1,24 +1,21 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userChats } from "../../apis/chatRequest.js";
-import Conversation from "../../components/conversation/Conversation.jsx";
-import ChatContainer from "../../components/chatContainer/ChatContainer";
-import { Search } from "../../components/index.js";
-import "./chat.css";
-import NavIcons from "../../components/trendSide/NavIcons.jsx";
 import { io } from "socket.io-client";
 
-const Chat = () => {
-  const dispatch = useDispatch();
-  const socket = useRef();
-  const user = useSelector((state) => state.authReducer.authData);
+import { userChats } from "../../apis/chatRequest.js";
+import { Search, ChatContainer, Conversation, NavIcons } from "../../components/index.js";
+import "./chat.css";
 
+const Chat = () => {
   const [chats, setChats] = useState([]);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [sendMessage, setSendMessage] = useState(null);
   const [receivedMessage, setReceivedMessage] = useState(null);
-
+  
+  const socket = useRef();
+  const user = useSelector((state) => state.authReducer.authData);
+  
   useEffect(() => {
     const getChats = async () => {
       try {

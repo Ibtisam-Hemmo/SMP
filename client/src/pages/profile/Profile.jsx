@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   PostSide,
   ProfileLeft,
@@ -15,7 +16,6 @@ const Profile = () => {
         <ProfileCard location="profile page" />
         <PostSide location='profile page'/>
       </div>
-
       <RightSide />
     </div>
   );

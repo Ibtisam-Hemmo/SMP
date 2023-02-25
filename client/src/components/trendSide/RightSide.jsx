@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import "./rightSide.css";
+
 import TrendCard from "./trendCard/TrendCard";
-import { ShareModal } from "../index";
 import NavIcons from "./NavIcons";
+import { ShareModal } from "../index";
+import "./rightSide.css";
 
 const RightSide = () => {
   const [modalOpened, setModalOpened] = useState(false);
