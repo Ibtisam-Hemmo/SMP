@@ -5,11 +5,11 @@ import ProfileCard from "./profileCard/ProfileCard";
 import Search from "./searchPart/Search";
 import FollowersCard from "./followersCard/FollowersCard";
 
-const ProfileSide = () => {
+const ProfileSide = ({ location }) => {
   return (
     <div className="leftSide">
       <Search />
-      <ProfileCard />
+      <ProfileCard location={location} />
       <FollowersCard />
     </div>
   );

@@ -1,14 +1,20 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import Post from "./posts/Posts";
 import Share from "./postShare/Share";
 import "./postSide.css";
 
-const PostSide = ({location}) => {
+const PostSide = ({ location }) => {
+  const user = useSelector((state) => state.authReducer.authData);
+  const params = useParams();
+  const { id } = params;
   return (
     <div className="postSide">
-      <Share />
-      <Post location={location}/>
+      {user._id === id || location == "home page" ? <Share /> : ""}
+
+      <Post location={location} />
     </div>
   );
 };

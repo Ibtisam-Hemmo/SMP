@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-
+import swal from "sweetalert";
 import "./share.css";
 import {
   FaShareAlt,
@@ -18,9 +18,9 @@ const Share = () => {
   const ImageRef = useRef();
   const desc = useRef();
   const dispatch = useDispatch();
-  
+
   window.REACT_APP_PUBLIC_FOLDER = "http://localhost:5000/images/";
-  
+
   const imageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       let postImage = event.target.files[0];
@@ -48,9 +48,12 @@ const Share = () => {
         console.log("error: ", error);
       }
     }
-
-    dispatch(sharePost(newPost));
-    resetForm();
+    if (!!newPost.desc || !!image) {
+      dispatch(sharePost(newPost));
+      resetForm();
+    } else {
+      swal("Enter your post");
+    }
   };
 
   const resetForm = () => {
@@ -60,7 +63,14 @@ const Share = () => {
 
   return (
     <div className="share">
-        <img src={user.coverImg ? user.coverImg : window.REACT_APP_PUBLIC_FOLDER + 'user.png'} alt="Profile Image" />
+      <img
+        src={
+          user.coverImg
+            ? user.coverImg
+            : window.REACT_APP_PUBLIC_FOLDER + "user.png"
+        }
+        alt="Profile Image"
+      />
       <div>
         <input
           type="text"

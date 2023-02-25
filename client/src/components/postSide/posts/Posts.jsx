@@ -10,12 +10,13 @@ import "./posts.css";
 const Posts = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.authReducer.authData);
-  let { posts, loading } = useSelector((state) => state.postReducer);
+  const { posts, loading } = useSelector((state) => state.postReducer);
   const params = useParams();
+  const { id } = params;
 
   useEffect(() => {
-    dispatch(getFeedPosts(user._id));
-  }, []);
+    dispatch(getFeedPosts(!!id ? id : user._id));
+  }, [id, user._id ]);
 
   if(!posts) return 'No Posts';
   if(params.id) posts = posts.filter((post)=> post.userId === params.id)
@@ -25,7 +26,13 @@ const Posts = () => {
       {loading
         ? "Fetching Posts..."
         : posts?.map((post, index) => {
-            return <Post post={post} key={index} />;
+            if (location === "profile page") {
+              if (post.userId === id) {
+                return <Post post={post} key={index} />;
+              }
+            } else {
+              return <Post post={post} key={index} />;
+            }
           })}
     </div>
   );

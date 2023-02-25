@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom'
+import swal from "sweetalert";
 
 import { login, signUp } from "../../actions/index.js";
 import "./auth.css";
@@ -11,7 +13,6 @@ const Auth = () => {
     firstName: "",
     lastName: "",
     username: "",
-    email: "",
     password: "",
     confirmPass: "",
   };
@@ -28,11 +29,26 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isRegistered) {
-      data.password === data.confirmPass
-        ? dispatch(signUp(data, navigate))
-        : setConfirmPass(false);
+      if (
+        !!data.password &&
+        !!data.username &&
+        !!data.firstName &&
+        !!data.lastName &&
+        !!data.password &&
+        !!data.confirmPass
+      ) {
+        data.password === data.confirmPass
+          ? dispatch(signUp(data, navigate))
+          : setConfirmPass(false);
+      } else {
+        swal("You need to fill all the required inputs");
+      }
     } else {
-      dispatch(login(data, navigate));
+      if (!!data.password && !!data.username) {
+        dispatch(login(data, navigate));
+      } else {
+        swal("You need to fill all the required inputs");
+      }
     }
   };
 
@@ -75,17 +91,6 @@ const Auth = () => {
               className="infoInput"
               name="username"
               value={data.username}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <input
-              required
-              type="text"
-              placeholder="email"
-              className="infoInput"
-              name="email"
-              value={data.email}
               onChange={handleChange}
             />
           </div>
