@@ -6,3 +6,6 @@ export { default as RightSide } from './trendSide/RightSide.jsx';
 export { default as Search } from './profileSide/searchPart/Search.jsx'
 export { default as FollowersCard } from './profileSide/followersCard/FollowersCard.jsx'
 export { default as ShareModal } from './postSide/postShare/ShareModal.jsx';
+export { default as Conversation } from './conversation/Conversation.jsx';
+export { default as ChatContainer } from './chatContainer/ChatContainer.jsx';
+export { default as NavIcons } from './trendSide/NavIcons.jsx';

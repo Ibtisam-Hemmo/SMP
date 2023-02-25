@@ -1,4 +1,4 @@
-import { FollowUser, UnFollowUser, UpdateUser } from "../apis/userReduest";
+import { FollowUser, UnFollowUser, UpdateUser } from "../apis/userRequest";
 
 export const updateUser = (id, formData) => async (dispatch) => {
     dispatch({ type: "UPDATING_START" })

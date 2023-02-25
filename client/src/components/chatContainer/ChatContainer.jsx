@@ -3,19 +3,19 @@ import { format } from "timeago.js";
 import InputEmoji from "react-input-emoji";
 
 import { addMsg, getMsg } from "../../apis/msgRequest.js";
-import { getUser } from "../../apis/userReduest.js";
+import { getUser } from "../../apis/userRequest.js";
 import "./chatContainer.css";
 
 const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
   window.REACT_APP_PUBLIC_FOLDER = "http://localhost:5000/images/";
+
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
-  const handleChange = (newMessage) => {
-    setNewMessage(newMessage);
-  };
-
+  const scroll = useRef();
+  const imageRef = useRef();
+  
   useEffect(() => {
     const userId = chat?.members?.find((id) => id !== currentUser);
     const getUserData = async () => {
@@ -26,7 +26,6 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
         console.log("error: ", error);
       }
     };
-
     if (chat !== null) getUserData();
   }, [chat, currentUser]);
 
@@ -47,6 +46,10 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
     scroll.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const handleChange = (newMessage) => {
+    setNewMessage(newMessage);
+  };
+
   const handleSend = async (e) => {
     e.preventDefault();
     const message = {
@@ -54,7 +57,6 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
       text: newMessage,
       chatId: chat._id,
     };
-
     const receiverId = chat.members.find((id) => id !== currentUser);
     setSendMessage({ ...message, receiverId });
 
@@ -72,9 +74,6 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
       setMessages([...messages, receivedMessage]);
     }
   }, [receivedMessage]);
-
-  const scroll = useRef();
-  const imageRef = useRef();
 
   return (
     <>

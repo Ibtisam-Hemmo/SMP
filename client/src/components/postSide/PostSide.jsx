@@ -8,12 +8,11 @@ import "./postSide.css";
 
 const PostSide = ({ location }) => {
   const user = useSelector((state) => state.authReducer.authData);
-  const params = useParams();
-  const { id } = params;
+  const { id } = useParams();
+
   return (
     <div className="postSide">
       {user._id === id || location == "home page" ? <Share /> : ""}
-
       <Post location={location} />
     </div>
   );

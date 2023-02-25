@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
 import { followUser, unFollowUser } from "../../../actions/userAction.js";
 
 const User = ({ follower }) => {
   const { firstName, lastName, username, avatar, _id, followers } = follower;
-  window.REACT_APP_PUBLIC_FOLDER = "http://localhost:5000/images/";
   const user = useSelector((state) => state.authReducer.authData);
   const dispatch = useDispatch();
 
   const [following, setFollowing] = useState(followers.includes(user._id));
+  window.REACT_APP_PUBLIC_FOLDER = "http://localhost:5000/images/";
 
   const handleFollow = () => {
     following
@@ -17,6 +18,7 @@ const User = ({ follower }) => {
       : dispatch(followUser(_id, user));
     setFollowing((prev) => !prev);
   };
+  
   return (
     <div className="follower">
       <div>
