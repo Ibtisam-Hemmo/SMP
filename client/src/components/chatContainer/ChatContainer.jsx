@@ -15,7 +15,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
 
   const scroll = useRef();
   const imageRef = useRef();
-  
+
   useEffect(() => {
     const userId = chat?.members?.find((id) => id !== currentUser);
     const getUserData = async () => {
@@ -75,6 +75,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
     }
   }, [receivedMessage]);
 
+  if (!messages) return "Start your chat ";
   return (
     <>
       <div className="ChatBox-container">
@@ -109,22 +110,23 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
               />
             </div>
             <div className="chat-body">
-              {messages.map((message, index) => (
-                <>
-                  <div
-                    key={index}
-                    ref={scroll}
-                    className={
-                      message.senderId === currentUser
-                        ? "message own"
-                        : "message"
-                    }
-                  >
-                    <span>{message.text}</span>{" "}
-                    <span>{format(message.createdAt)}</span>
-                  </div>
-                </>
-              ))}
+              {Array.isArray(messages) &&
+                messages.map((message, index) => (
+                  <>
+                    <div
+                      key={index}
+                      ref={scroll}
+                      className={
+                        message.senderId === currentUser
+                          ? "message own"
+                          : "message"
+                      }
+                    >
+                      <span>{message.text}</span>{" "}
+                      <span>{format(message.createdAt)}</span>
+                    </div>
+                  </>
+                ))}
             </div>
             <div className="chat-sender">
               <div onClick={() => imageRef.current.click()}>+</div>

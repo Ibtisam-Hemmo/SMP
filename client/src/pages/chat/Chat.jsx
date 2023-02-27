@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
 
 import { userChats } from "../../apis/chatRequest.js";
-import { Search, ChatContainer, Conversation, NavIcons } from "../../components/index.js";
+import {
+  Search,
+  ChatContainer,
+  Conversation,
+  NavIcons,
+} from "../../components/index.js";
 import "./chat.css";
 
 const Chat = () => {
@@ -12,10 +17,10 @@ const Chat = () => {
   const [currentChat, setCurrentChat] = useState(null);
   const [sendMessage, setSendMessage] = useState(null);
   const [receivedMessage, setReceivedMessage] = useState(null);
-  
+
   const socket = useRef();
   const user = useSelector((state) => state.authReducer.authData);
-  
+
   useEffect(() => {
     const getChats = async () => {
       try {
@@ -53,7 +58,6 @@ const Chat = () => {
     const online = onlineUsers.find((user) => user.userId === chatMember);
     return online ? true : false;
   };
-
   return (
     <div className="Chat">
       <div className="Left-side-chat">
@@ -61,20 +65,21 @@ const Chat = () => {
         <div className="Chat-container">
           <h2>Chats</h2>
           <div className="Chat-list">
-            {chats.map((chat, index) => (
-              <div
-                key={index}
-                onClick={() => {
-                  setCurrentChat(chat);
-                }}
-              >
-                <Conversation
-                  data={chat}
-                  currentUser={user._id}
-                  online={checkOnlineStatus(chat)}
-                />
-              </div>
-            ))}
+            {Array.isArray(chats) &&
+              chats?.map((chat, index) => (
+                <div
+                  key={index}
+                  onClick={() => {
+                    setCurrentChat(chat);
+                  }}
+                >
+                  <Conversation
+                    data={chat}
+                    currentUser={user._id}
+                    online={checkOnlineStatus(chat)}
+                  />
+                </div>
+              ))}
           </div>
         </div>
       </div>

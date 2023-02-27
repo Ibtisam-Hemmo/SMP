@@ -7,7 +7,7 @@ import "./followersCard.css";
 
 const FollowersCard = () => {
   const [people, setPeople] = useState([]);
-  const user  = useSelector((state) => state.authReducer.authData);
+  const user = useSelector((state) => state.authReducer.authData);
 
   useEffect(() => {
     const fetchPeople = async () => {
@@ -17,14 +17,17 @@ const FollowersCard = () => {
     fetchPeople();
   }, []);
 
+  if (!people) return "People data is still loading ";
+
   return (
     <div className="followersCard">
       <h3>People you may know</h3>
-      {people.map((follower, index) => {
-        if (follower._id !== user._id) {
-          return <User follower={follower} key={index} />;
-        }
-      })}
+      {Array.isArray(people) &&
+        people?.map((follower, index) => {
+          if (follower._id !== user._id) {
+            return <User follower={follower} key={index} />;
+          }
+        })}
     </div>
   );
 };
