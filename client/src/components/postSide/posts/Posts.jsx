@@ -9,7 +9,7 @@ import "./posts.css";
 const Posts = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.authReducer.authData);
-  const { posts, loading } = useSelector((state) => state.postReducer);
+  let { posts, loading } = useSelector((state) => state.postReducer);
   const { id } = useParams();
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const Posts = () => {
   }, [id, user._id]);
 
   if(!posts) return 'No Posts';
-  if(params.id) posts = posts.filter((post)=> post.userId === params.id)
+  if(id) posts = posts.filter((post)=> post.userId === id)
 
   return (
     <div className="posts">
