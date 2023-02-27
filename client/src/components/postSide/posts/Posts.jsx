@@ -16,14 +16,14 @@ const Posts = () => {
     dispatch(getFeedPosts(!!id ? id : user._id));
   }, [id, user._id]);
 
-  if(!posts) return 'No Posts';
-  if(id) posts = posts.filter((post)=> post.userId === id)
+  if (!posts) return "No Posts";
+  if (id) posts = posts.filter((post) => post.userId === id);
+  if (loading) return "Fetching Posts...";
 
   return (
     <div className="posts">
-      {loading
-        ? "Fetching Posts..."
-        : posts?.map((post, index) => {
+      {Array.isArray(posts)
+        ? posts?.map((post, index) => {
             if (location === "profile page") {
               if (post.userId === id) {
                 return <Post post={post} key={index} />;
@@ -31,7 +31,8 @@ const Posts = () => {
             } else {
               return <Post post={post} key={index} />;
             }
-          })}
+          })
+        : "Something went wrong"}
     </div>
   );
 };
