@@ -1,9 +1,8 @@
 import bcryptjs from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 
 import { userModel } from '../../models/index.js';
 import { signUpSchema } from '../../validation/index.js';
-import { customError } from '../../utils/index.js';
+import { customError, generateToken } from '../../utils/index.js';
 
 const register = async (req, res, next) => {
     try {
@@ -17,14 +16,12 @@ const register = async (req, res, next) => {
             const newUser = userModel(req.body);
 
             const user = await newUser.save();
-            const token = jwt.sign({
-                username: user.username,
-                id: user._id
-            }, process.env.JWT_KEY, { expiresIn: '3h' });
-
+            const payload = { username: user.username, id: user._id }
+            const token = generateToken(payload)
+            console.log('token: ', token);
             res
                 .status(201)
-                .cookie('token', token, { httpOnly: true })
+                .cookie('token', token)
                 .json(user)
         }
     } catch (error) {
