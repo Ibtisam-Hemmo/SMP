@@ -1,6 +1,6 @@
 import { postModel } from '../../models/index.js';
 
-const deletePost = async (req, res) => {
+const deletePost = async (req, res, next) => {
     const { postId } = req.params;
     const userId = req.body;
 
@@ -8,12 +8,12 @@ const deletePost = async (req, res) => {
         const post = await postModel.findById(postId)
         if (post.userId === userId) {
             await post.deleteOne(postId)
-            res.json({ msg: " post is deleted" })
+            res.json({ msg: "post is deleted successfully" })
         } else {
             res.status(403).json({ msg: 'You are only allowed to delete your posts' })
         }
     } catch (error) {
-        res.status(500).json({ msg: error.message })
+        next(error)
     }
 }
 

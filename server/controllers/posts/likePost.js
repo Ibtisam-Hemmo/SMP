@@ -1,6 +1,6 @@
 import { postModel } from '../../models/index.js';
 
-const likePost = async (req, res) => {
+const likePost = async (req, res, next) => {
     const { postId } = req.params;
     const { userId } = req.body;
 
@@ -14,7 +14,7 @@ const likePost = async (req, res) => {
             res.json({ msg: "post is unLiked" })
         }
     } catch (error) {
-        res.status(500).json({ msg: error.message })
+        next(error)
     }
 }
 

@@ -17,12 +17,9 @@ const register = async (req, res, next) => {
 
             const user = await newUser.save();
             const payload = { username: user.username, id: user._id }
-            const token = generateToken(payload)
-            console.log('token: ', token);
-            res
-                .status(201)
-                .cookie('token', token)
-                .json(user)
+            const { password, ...otherInfo } = user._doc
+            generateToken(res, payload, otherInfo, next)
+
         }
     } catch (error) {
         if (error.name === 'ValidationError') {

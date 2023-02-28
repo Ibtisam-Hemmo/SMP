@@ -1,13 +1,12 @@
 import { postModel } from '../../models/index.js';
 
-const createPost = async (req, res) => {
+const createPost = async (req, res, next) => {
     const newPost = new postModel(req.body);
     try {
         newPost.save();
         res.json(newPost)
-
     } catch (error) {
-        res.status(500).json({ msg: error.message })
+        next(error)
     }
 }
 

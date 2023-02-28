@@ -1,6 +1,6 @@
 import { userModel } from "../../models/index.js";
 
-const deleteUser = async (req, res) => {
+const deleteUser = async (req, res, next) => {
     const { id } = req.params;
     const { currentUserId, currentAdminStatus } = req.body;
     if (id === currentUserId || currentAdminStatus) {
@@ -8,7 +8,7 @@ const deleteUser = async (req, res) => {
             await userModel.findByIdAndDelete(id)
             res.status(200).json({msg: 'User is deleted'})
         } catch (error) {
-            res.status(500).json({ msg: error.message })
+            next(error)
         }
     } else {
         res.status(403).json({ msg: 'Access denied!! You can only delete your account' })

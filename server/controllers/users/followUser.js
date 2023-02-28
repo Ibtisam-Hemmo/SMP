@@ -1,6 +1,6 @@
 import { userModel } from '../../models/index.js';
 
-const followUser = async (req, res) => {
+const followUser = async (req, res, next) => {
     const { id } = req.params;
     const { _id } = req.body;
 
@@ -14,12 +14,12 @@ const followUser = async (req, res) => {
             if (!followUser.followers.includes(_id)) {
                 await followUser.updateOne({ $push: { followers: _id } })
                 await followingUser.updateOne({ $push: { following: id } })
-                res.status(200).json({ msg: 'User is followed' })
+                res.json({ msg: 'User is followed' })
             } else {
                 res.status(403).json({ msg: 'User is already followed by you' })
             }
         } catch (error) {
-            res.status(500).json({ msg: error.message })
+            next(error)
         }
     }
 }

@@ -1,7 +1,7 @@
 import { postModel, userModel } from '../../models/index.js';
 import mongoose from 'mongoose';
 
-const feed = async (req, res) => {
+const feed = async (req, res, next) => {
     const { id } = req.params;
     try {
         const currentUserPosts = await postModel.find({ userId: id });
@@ -28,11 +28,9 @@ const feed = async (req, res) => {
         ]);
         const feedPosts = currentUserPosts.concat(...followingPosts[0].followingPosts)
             .sort((a, b) => b.createdAt - a.createdAt);
-
-        res.json(feedPosts)
-        
+        res.json(feedPosts);
     } catch (error) {
-        res.status(500).json({ msg: error.message })
+        next(error)
     }
 }
 export default feed;
