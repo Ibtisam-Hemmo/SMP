@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import path from 'path';
 import url from 'url';
-
+import cookieParser from 'cookie-parser'
 import router from './routes/index.js';
 import { errorMiddleware } from './middlewares/index.js'
 
@@ -22,6 +22,7 @@ app.use([
     bodyParser.urlencoded({ limit: '30mb', extended: true }),
     cors(),
     express.json(),
+    cookieParser()
 ]);
 
 if (process.env.NODE_ENV === 'production') {
