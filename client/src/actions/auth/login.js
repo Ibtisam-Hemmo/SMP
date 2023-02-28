@@ -1,6 +1,6 @@
 import axios from 'axios';
 import swal from 'sweetalert';
-import { logIn } from '../../apis/authRequest.js';
+import { logIn, logOut } from '../../apis/authRequest.js';
 
 const login = (FormData, navigate) => async (dispatch) => {
     dispatch({ type: 'AUTH_START' })
@@ -20,6 +20,7 @@ const login = (FormData, navigate) => async (dispatch) => {
 export default login;
 
 export const logout = () => async (dispatch) => {
+    await logOut();
     dispatch({ type: 'LOG_OUT' })
     navigate("../", { replace: true })
 }
