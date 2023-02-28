@@ -1,6 +1,6 @@
 import { userModel } from '../../models/index.js';
 
-const followUser = async (req, res) => {
+const followUser = async (req, res, next) => {
     const { id } = req.params;
     const { _id } = req.body;
 
@@ -19,7 +19,7 @@ const followUser = async (req, res) => {
                 res.status(403).json({ msg: 'User is not followed by you' })
             }
         } catch (error) {
-            res.status(500).json({ msg: error.message })
+            next(error)
         }
     }
 }
