@@ -15,7 +15,8 @@ const login = async (req, res, next) => {
             const isAuth = await bcryptjs.compare(password, user.password);
             if (isAuth) {
                 const payload = { username: user.username, id: user._id }
-                generateToken(res, payload, user, next)
+                const { password, ...otherInfo } = user._doc
+                generateToken(res, payload, otherInfo, next)
             }
             else res.status(400).json({ msg: 'password is wrong' })
         }
