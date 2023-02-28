@@ -7,6 +7,6 @@ const loginSchema = (username, password) => {
             .string()
             .required('Password is required'),
     });
-    return schema.validateSync({ username, password }, { abortEarly: false })
+    return schema.validate({ username, password }, { abortEarly: false })
 }
 export default loginSchema;
