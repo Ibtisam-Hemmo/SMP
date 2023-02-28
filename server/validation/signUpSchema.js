@@ -8,13 +8,12 @@ const signUpSchema = (data) => {
         lastName: yup.string().required('lastName is required'),
         password: yup
             .string()
-            .min(8, 'Password must be at least 8 characters')
             .required('Password is required'),
         confirmPass: yup.string()
             .oneOf([yup.ref('password'), null], 'Passwords must match')
             .required('Confirm Password is required'),
     });
-    return schema.validateSync(
+    return schema.validate(
         { username, firstName, lastName, password, confirmPass },
         { abortEarly: false }
     )
