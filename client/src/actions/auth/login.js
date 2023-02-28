@@ -9,13 +9,8 @@ const login = (FormData, navigate) => async (dispatch) => {
         dispatch({ type: 'AUTH_SUCCESS', data: data })
         navigate("../home", { replace: true })
     } catch (error) {
-        if (error.response?.data) {
-            // const errorResponse = error.response.data;
-            // const regex = /<pre>(.*?)<\/pre>/s;
-            // const matches = errorResponse.match(regex);
-            // const errorMessage = matches ? matches[1].trim() : 'Unknown error';
-            // console.log('err', errorMessage);
-            console.log('err', error);
+        if (axios.isAxiosError(error)) {
+            swal(error.response?.data?.msg)
         } else {
             console.log(error);
         }
