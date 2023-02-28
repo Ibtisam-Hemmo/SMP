@@ -1,6 +1,6 @@
 import { messageModel } from '../../models/index.js';
 
-const addMsg = async (req, res) => {
+const addMsg = async (req, res, next) => {
     const { chatId, senderId, text } = req.body;
 
     const message = new messageModel({
@@ -12,7 +12,7 @@ const addMsg = async (req, res) => {
         const result = await message.save();
         res.json(result);
     } catch (error) {
-        res.status(500).json(error.message);
+        next(error)
     }
 };
 

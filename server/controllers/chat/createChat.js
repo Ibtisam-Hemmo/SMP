@@ -1,6 +1,6 @@
 import { chatModel } from '../../models/index.js';
 
-const createChat = async (req, res) => {
+const createChat = async (req, res, next) => {
     const { userId, id } = req.body;
     try {
         const chatFound = await chatModel.findOne({ members: [userId, id] });

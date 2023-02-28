@@ -1,6 +1,6 @@
 import { chatModel } from '../../models/index.js';
 
-const getChat = async (req, res) => {
+const getChat = async (req, res, next) => {
     const { firstId, secondId } = req.params;
 
     try {
@@ -9,7 +9,7 @@ const getChat = async (req, res) => {
         });
         res.json(chat)
     } catch (error) {
-        res.status(500).json(error)
+        next(error)
     }
 };
 
