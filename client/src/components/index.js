@@ -9,3 +9,5 @@ export { default as ShareModal } from './postSide/postShare/ShareModal.jsx';
 export { default as Conversation } from './conversation/Conversation.jsx';
 export { default as ChatContainer } from './chatContainer/ChatContainer.jsx';
 export { default as NavIcons } from './trendSide/NavIcons.jsx';
+export { default as Loading } from './loading/Loading.jsx';
+export { default as PostLoading } from './loading/PostLoading.jsx';
