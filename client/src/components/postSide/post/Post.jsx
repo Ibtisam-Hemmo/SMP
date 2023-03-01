@@ -5,6 +5,7 @@ import { FaRegCommentDots, FaHeart, FaRegHeart, FaShare } from "react-icons/fa";
 
 import { likePost } from "../../../apis/feedRequest";
 import { getUser } from "../../../apis/userRequest";
+import { PostLoading } from "../../index.js";
 import "./post.css";
 
 const Post = ({ post }) => {
@@ -38,7 +39,7 @@ const Post = ({ post }) => {
     likeStatus ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1);
   };
   
-  if (loading) return <p>Post is still loading</p>;
+  if (loading) return <PostLoading />;
   return (
     <div className="post">
       <div className="follower">

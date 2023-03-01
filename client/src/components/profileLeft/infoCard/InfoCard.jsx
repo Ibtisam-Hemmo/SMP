@@ -5,7 +5,7 @@ import { GrEdit } from "react-icons/gr";
 
 import EditModal from "../../profileSide/editProfileModal/EditModal";
 import { getUser } from "../../../apis/userRequest";
-import { logout } from "../../../actions/auth/login";
+import { logout } from "../../../actions/authActions";
 import "./infoCard.css";
 
 const InfoCard = () => {
@@ -30,8 +30,7 @@ const InfoCard = () => {
   }, [profileUserId]);
 
   const handleLogout = () => {
-    dispatch(logout());
-    navigate('/')
+    dispatch(logout(navigate));
   };
 
   return (

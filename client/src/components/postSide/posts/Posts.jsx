@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 import { getFeedPosts } from "../../../actions/index.js";
 import Post from "../post/Post";
+import { PostLoading } from "../../index.js";
 import "./posts.css";
 
 const Posts = () => {
@@ -18,7 +19,7 @@ const Posts = () => {
 
   if (!posts) return "No Posts";
   if (id) posts = posts.filter((post) => post.userId === id);
-  if (loading) return "Fetching Posts...";
+  if (loading) return <PostLoading />
 
   return (
     <div className="posts">
