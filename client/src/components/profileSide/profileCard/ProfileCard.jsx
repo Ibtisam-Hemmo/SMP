@@ -6,6 +6,7 @@ import { FaRegCommentDots } from "react-icons/fa";
 import "./profileCard.css";
 import { getUser } from "../../../apis/userRequest";
 import { createChat } from "../../../apis/chatRequest";
+import { Loading } from "../../index.js";
 
 const ProfileCard = ({ location }) => {
   const [person, setPerson] = useState({});
@@ -14,8 +15,8 @@ const ProfileCard = ({ location }) => {
   const user = useSelector((state) => state.authReducer.authData);
   const posts = useSelector((state) => state.postReducer.posts);
   const navigate = useNavigate();
-  const { id }  = useParams();
-  
+  const { id } = useParams();
+
   window.REACT_APP_PUBLIC_FOLDER = "http://localhost:5000/images/";
 
   useEffect(() => {
@@ -44,7 +45,7 @@ const ProfileCard = ({ location }) => {
     chat();
   };
 
-  if (loading) return <p> Data is still loading </p>;
+  if (loading) return <Loading />;
 
   return (
     <div className="profileCard">
