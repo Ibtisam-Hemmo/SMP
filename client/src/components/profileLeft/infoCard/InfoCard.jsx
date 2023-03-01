@@ -30,8 +30,7 @@ const InfoCard = () => {
   }, [profileUserId]);
 
   const handleLogout = () => {
-    dispatch(logout());
-    navigate('/')
+    dispatch(logout(navigate));
   };
 
   return (
