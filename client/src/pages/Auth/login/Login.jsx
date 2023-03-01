@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 
-import login from "../../../actions/auth/login";
+import { login } from "../../../actions/authActions";
 import styles from "./Login.module.css";
 
 const Login = () => {
@@ -67,7 +67,7 @@ const Login = () => {
         <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
-            type="text"
+            type="password"
             name="password"
             className={styles.input}
             value={data.password}
