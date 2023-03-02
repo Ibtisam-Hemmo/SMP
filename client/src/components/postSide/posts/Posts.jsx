@@ -19,19 +19,13 @@ const Posts = () => {
 
   if (!posts) return "No Posts";
   if (id) posts = posts.filter((post) => post.userId === id);
-  if (loading) return <PostLoading />
+  if (loading) return <PostLoading />;
 
   return (
     <div className="posts">
       {Array.isArray(posts)
         ? posts?.map((post, index) => {
-            if (location === "profile page") {
-              if (post.userId === id) {
-                return <Post post={post} key={index} />;
-              }
-            } else {
-              return <Post post={post} key={index} />;
-            }
+            return <Post post={post} key={index} />;
           })
         : "Something went wrong"}
     </div>
