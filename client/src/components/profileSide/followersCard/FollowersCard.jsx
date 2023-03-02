@@ -17,15 +17,14 @@ const FollowersCard = () => {
     fetchPeople();
   }, []);
 
-  if (!people) return "People data is still loading ";
+  if (!people) return "Loading ...";
 
   return (
     <div className="followersCard">
       <h3>People you may know</h3>
-      {Array.isArray(people) &&
-        people?.map((follower, index) => {
+      {people?.map((follower) => {
           if (follower._id !== user._id) {
-            return <User follower={follower} key={index} />;
+            return <User follower={follower} key={follower._id} />;
           }
         })}
     </div>
