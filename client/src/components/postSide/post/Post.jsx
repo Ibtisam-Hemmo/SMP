@@ -10,6 +10,7 @@ import { deletePost, likePost } from "../../../apis/feedRequest";
 import { getUser } from "../../../apis/userRequest";
 import { PostLoading } from "../../index.js";
 import "./post.css";
+import removePost from "../../../actions/uploadAction";
 
 const Post = ({ post }) => {
   const { image, desc, likes, _id, userId, createdAt } = post;
@@ -52,18 +53,13 @@ const Post = ({ post }) => {
     }).then(async (willDelete) => {
       if (willDelete) {
         try {
-          const {
-            data: { msg },
-          } = await deletePost(_id, user._id);
-          if (msg === "post is deleted successfully") {
-            swal("Poof! Your imaginary file has been deleted!", {
-              icon: "success",
-            });
-          } else swal("something went wrong, try again");
+          dispatch(removePost(_id, user._id));
+          swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+          });
         } catch (error) {
-          if (error?.response?.data?.msg == "There is no such post")
-            swal("There is not such post, try to refresh");
-          else console.log("error: ", error);
+          if (error?.response?.data?.msg)
+            swal("Something went wrong, try again");
         }
       } else {
         swal("Your post is safe!");

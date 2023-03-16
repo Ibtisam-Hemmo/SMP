@@ -126,7 +126,7 @@ function EditModal({ modalOpened, setModalOpened, data }) {
             placeholder="Relationship Status"
             name="relationship"
             onChange={handleChange}
-            value={formData.status}
+            value={formData.relationship}
           />
         </div>
 

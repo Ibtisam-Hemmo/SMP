@@ -1,4 +1,5 @@
 import { UploadImage, SharePost } from '../apis/uploadReq.js';
+import { deletePost } from '../apis/feedRequest';
 
 export const uploadImage = (data) => async (dispatch) => {
     dispatch({ type: 'UPLOAD_START' })
@@ -22,3 +23,17 @@ export const sharePost = (post) => async (dispatch) => {
 
     }
 };
+
+
+const removePost = (postId, userId) => async (dispatch) => {
+    dispatch({ type: 'DELETE_POST_START' });
+    try {
+        await deletePost(postId, userId);
+        dispatch({ type: 'DELETE_POST_SUCCESS', postId });
+    } catch (error) {
+        console.log(error);
+        dispatch({ type: 'DELETE_POST_FAIL' });
+    }
+};
+export default removePost;
+

@@ -1,4 +1,4 @@
-import { FollowUser, UnFollowUser, UpdateUser } from "../apis/userRequest";
+import { FollowUser, UpdateUser } from "../apis/userRequest";
 
 export const updateUser = (id, formData) => async (dispatch) => {
     dispatch({ type: "UPDATING_START" })
@@ -18,5 +18,5 @@ export const followUser = (id, data)=> async(dispatch)=> {
 
 export const unFollowUser = (id, data)=> async(dispatch)=> {
     dispatch({type: "UNFOLLOW_USER", data: id})
-    UnFollowUser(id, data)
+    FollowUser(id, data)
 }

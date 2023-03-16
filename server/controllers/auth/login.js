@@ -18,16 +18,12 @@ const login = async (req, res, next) => {
                 const { password, ...otherInfo } = user._doc
                 generateToken(res, payload, otherInfo, next)
             }
-            else res.status(400).json({ msg: 'password is wrong' })
+            next(new customError(401, 'password is wrong'));
         }
-        else res.status(404).json({ msg: 'You are not registered, try to sign up instead' })
+        else next(new customError(404, 'You are not registered, try to sign up instead'));
     } catch (error) {
-        if (error.name === 'ValidationError') {
-            next(new customError(400, error.errors));
-        }
-        else {
             next(error)
-        }
+        
     }
 }
 export default login;
