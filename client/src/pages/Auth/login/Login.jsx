@@ -25,13 +25,6 @@ const Login = () => {
     });
   };
 
-  const resetForm = () => {
-    setData({
-      username: "",
-      password: "",
-      rememberMe: false,
-    });
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -81,9 +74,6 @@ const Login = () => {
                 cursor: "pointer",
                 color: "purple",
                 textDecoration: "underline",
-              }}
-              onClick={() => {
-                resetForm();
               }}
             >
               Don't have an account? Sign up

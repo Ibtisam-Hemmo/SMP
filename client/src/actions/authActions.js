@@ -22,6 +22,7 @@ export const login = (FormData, navigate) => async (dispatch) => {
         dispatch({ type: 'AUTH_SUCCESS', data: data, rememberMe: FormData.rememberMe })
         navigate("/home", { replace: true })
     } catch (error) {
+        console.log('error: ', error);
         if (axios.isAxiosError(error)) {
             swal(error.response?.data?.msg)
         } else {
