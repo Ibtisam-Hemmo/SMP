@@ -19,7 +19,6 @@ const register = async (req, res, next) => {
             const payload = { username: user.username, id: user._id }
             const { password, ...otherInfo } = user._doc
             generateToken(res, payload, otherInfo, next)
-
         }
     } catch (error) {
         if (error.name === 'ValidationError') {

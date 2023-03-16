@@ -11,7 +11,7 @@ import { errorMiddleware } from './middlewares/index.js'
 const app = express();
 dotenv.config();
 
-const port = process.env.PORT || 5050;
+const port = process.env.PORT || 5000;
 app.set('port', port);
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 }
 
-app.use(errorMiddleware)
 app.use('/api/v1', router);
+app.use(errorMiddleware)
 
 export default app;

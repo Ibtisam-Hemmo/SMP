@@ -16,7 +16,8 @@ const followUser = async (req, res, next) => {
                 await followingUser.updateOne({ $push: { following: id } })
                 res.json({ msg: 'User is followed' })
             } else {
-                res.status(403).json({ msg: 'User is already followed by you' })
+                await followUser.updateOne({ $pull: { followers: _id } })
+                await followingUser.updateOne({ $pull: { following: id } })
             }
         } catch (error) {
             next(error)
