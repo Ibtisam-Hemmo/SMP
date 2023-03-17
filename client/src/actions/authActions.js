@@ -7,7 +7,7 @@ export const signUp = (FormData, navigate) => async (dispatch) => {
     try {
         const { data } = await signup(FormData);
         dispatch({ type: 'AUTH_SUCCESS', data: data })
-        navigate("../home", { replace: true })
+        navigate("/", { replace: true })
     } catch (error) {
         if (axios.isAxiosError(error)) swal(error.response?.data?.msg);
         else console.log('error: ', error);
@@ -20,7 +20,7 @@ export const login = (FormData, navigate) => async (dispatch) => {
     try {
         const { data } = await logIn(FormData);
         dispatch({ type: 'AUTH_SUCCESS', data: data, rememberMe: FormData.rememberMe })
-        navigate("/home", { replace: true })
+        navigate("/", { replace: true })
     } catch (error) {
         console.log('error: ', error);
         if (axios.isAxiosError(error)) {

@@ -1,4 +1,5 @@
 import { userModel } from "../../models/index.js";
+import { customError } from "../../utils/index.js";
 
 const getUser = async (req, res, next) => {
     const { id } = req.params;
@@ -9,8 +10,9 @@ const getUser = async (req, res, next) => {
             const { password, ...otherInfo } = user._doc;
             res.json(otherInfo)
         }
-        else res.status(404).json({ msg: 'No user is found' });
-    } catch (error) {
+        else next(new customError(404, 'No user is found'))
+    }
+    catch (error) {
         next(error)
     }
 }

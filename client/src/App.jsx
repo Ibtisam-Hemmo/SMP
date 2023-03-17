@@ -1,11 +1,9 @@
 import { useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 
-import { Profile, Home } from "./pages";
-import Chat from "./pages/chat/Chat";
+import { Profile, Home, ProtectedRoute, Chat } from "./pages";
+import { Login, Signup } from "./pages/Auth/index.js";
 import "./App.css";
-import Login from "./pages/Auth/login/Login.jsx";
-import Signup from "./pages/Auth/signup/Signup";
 
 function App() {
   const user = useSelector((state) => state.authReducer.authData);
@@ -17,27 +15,29 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={user ? <Home /> : <Login />}
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
         />
-        <Route
-          path="/home"
-          element={user ? <Home /> : <Login />}
-        />
-        <Route
-          path="/login"
-          element={user ? <Home /> : <Login />}
-        />
-        <Route
-          path="/signup"
-          element={user ? <Home /> : <Signup />}
-        />
+        <Route path="/login" element={user ? <Home /> : <Login />} />
+        <Route path="/signup" element={user ? <Home /> : <Signup />} />
         <Route
           path="/profile/:id"
-          element={user ? <Profile /> : <Login />}
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/chat"
-          element={user ? <Chat /> : <Login />}
+          element={
+            <ProtectedRoute>
+              <Chat />
+            </ProtectedRoute>
+          }
         />
       </Routes>
     </div>

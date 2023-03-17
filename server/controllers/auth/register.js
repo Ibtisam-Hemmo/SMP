@@ -8,7 +8,7 @@ const register = async (req, res, next) => {
     try {
         await signUpSchema(req.body)
         const registered = await userModel.findOne({ username: req.body.username });
-        if (registered) res.status(400).json({ msg: 'There is already an account using this username, try to login instead' })
+        if (registered) next(new customError(400, 'There is already an account using this username, try to login instead'))
         else {
             const salt = await bcryptjs.genSalt(10);
             const hashedPassword = await bcryptjs.hash(req.body.password, salt);
@@ -21,12 +21,7 @@ const register = async (req, res, next) => {
             generateToken(res, payload, otherInfo, next)
         }
     } catch (error) {
-        if (error.name === 'ValidationError') {
-            next(new customError(400, error.errors));
-        }
-        else {
-            next(error)
-        }
+        next(error)
     }
 }
 
