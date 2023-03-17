@@ -6,8 +6,7 @@ import { getUser } from "../../apis/userRequest";
 const Conversation = ({ data, currentUser, online }) => {
   const [userData, setUserData] = useState(null);
   const dispatch = useDispatch();
-
-  window.REACT_APP_PUBLIC_FOLDER = "http://localhost:5000/images/";
+  const PublicImages = import.meta.env.VITE_PUBLIC_FOLDER;
 
   useEffect(() => {
     const userId = data.members.find((id) => id !== currentUser);
@@ -31,8 +30,8 @@ const Conversation = ({ data, currentUser, online }) => {
           <img
             src={
               userData?.avatar
-                ? `${window.REACT_APP_PUBLIC_FOLDER}${userData?.avatar}`
-                : window.REACT_APP_PUBLIC_FOLDER + "user.png"
+                ? `${PublicImages}${userData?.avatar}`
+                : PublicImages + "user.png"
             }
             alt="Profile Image"
             className="followerImage"

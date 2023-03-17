@@ -36,8 +36,9 @@ export const logout = (navigate) => async (dispatch) => {
     try {
         await logOut();
         dispatch({ type: 'LOG_OUT' });
-        localStorage.removeItem('user'); 
-        navigate('/login', { replace: true }); 
+        const user = localStorage.getItem('user')
+        if (user) localStorage.removeItem('user');
+        navigate('/login', { replace: true });
     } catch (error) {
         console.log(error);
     }

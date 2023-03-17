@@ -1,8 +1,8 @@
-const io = require("socket.io")(8800, {
-    cors: {
-        origin: "http://localhost:5173",
-    },
-});
+import app from '../server/app.js';
+import { Server } from 'socket.io';
+import http from 'http';
+const httpServer = http.createServer(app);
+const io = new Server(httpServer);
 
 let activeUsers = [];
 
@@ -26,4 +26,8 @@ io.on("connection", (socket) => {
             io.to(user.socketId).emit("receive-message", data);
         }
     });
+});
+
+httpServer.listen(8800, () => {
+    console.log('Server running on port 8800');
 });

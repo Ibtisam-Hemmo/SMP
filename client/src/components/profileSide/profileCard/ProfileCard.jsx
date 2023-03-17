@@ -16,8 +16,7 @@ const ProfileCard = ({ location }) => {
   const posts = useSelector((state) => state.postReducer.posts);
   const navigate = useNavigate();
   const { id } = useParams();
-
-  window.REACT_APP_PUBLIC_FOLDER = "http://localhost:5000/images/";
+  const PublicImages = import.meta.env.VITE_PUBLIC_FOLDER;
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -53,16 +52,16 @@ const ProfileCard = ({ location }) => {
         <img
           src={
             person?.coverPicture
-              ? `${window.REACT_APP_PUBLIC_FOLDER}${person?.coverPicture}`
-              : window.REACT_APP_PUBLIC_FOLDER + "profileBack.jpeg"
+              ? `${PublicImages}${person?.coverPicture}`
+              : PublicImages + "profileBack.jpeg"
           }
           alt="Cover Image"
         />
         <img
           src={
             person?.avatar
-              ? `${window.REACT_APP_PUBLIC_FOLDER}${person?.avatar}`
-              : window.REACT_APP_PUBLIC_FOLDER + "user.png"
+              ? `${PublicImages}${person?.avatar}`
+              : PublicImages + "user.png"
           }
           alt="Profile Image"
         />
