@@ -1,4 +1,5 @@
 import { postModel } from '../../models/index.js';
+import { customError } from "../../utils/index.js";
 
 const deletePost = async (req, res, next) => {
     const { postId } = req.params;
@@ -11,11 +12,10 @@ const deletePost = async (req, res, next) => {
                 await post.deleteOne({ _id: postId })
                 res.json({ msg: "post is deleted successfully" })
             } else {
-                res.status(403).json({ msg: 'You are only allowed to delete your posts' })
+                next(new customError(403, 'You are only allowed to delete your posts'))
             }
         } else {
-            res.status(400).json({ msg: 'There is no such post' })
-
+            next(new customError(400, 'There is no such post'))
         }
     } catch (error) {
         next(error)

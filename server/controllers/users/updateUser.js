@@ -1,12 +1,14 @@
-import { userModel } from "../../models/index.js";
 import bcryptjs from 'bcryptjs';
+
+import { userModel } from "../../models/index.js";
 import generateToken from "../../utils/generateToken.js";
+import { customError } from "../../utils/index.js";
 
 const updateUser = async (req, res, next) => {
     const { id } = req.params;
     const { _id, password } = req.body;
-    
-    if (id === _id ) {
+
+    if (id === _id) {
         try {
             if (password) {
                 const salt = await bcryptjs.genSalt(10);
@@ -18,13 +20,13 @@ const updateUser = async (req, res, next) => {
                 const payload = { username: user.username, id: user._id }
                 generateToken(res, payload, otherInfo, next)
             } else {
-                res.status(404).json({ msg: 'no user is found' })
+                next(new customError(404, 'no user is found'))
             }
         } catch (error) {
             next(error)
         }
     } else {
-        res.status(403).json({ msg: 'Access denied!! You can only update your info' })
+        next(new customError(403, 'Access denied!! You can only update your info'))
     }
 }
 export default updateUser;
