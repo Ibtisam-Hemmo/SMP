@@ -21,8 +21,7 @@ const Share = () => {
   
   const user = useSelector((state) => state.authReducer.authData);
   const loading = useSelector((state) => state.postReducer.uploading);
-
-  window.REACT_APP_PUBLIC_FOLDER = "http://localhost:5000/images/";
+  const PublicImages = import.meta.env.VITE_PUBLIC_FOLDER;
 
   const imageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -70,7 +69,7 @@ const Share = () => {
         src={
           user.coverImg
             ? user.coverImg
-            : window.REACT_APP_PUBLIC_FOLDER + "user.png"
+            : PublicImages+ "user.png"
         }
         alt="Profile Image"
       />

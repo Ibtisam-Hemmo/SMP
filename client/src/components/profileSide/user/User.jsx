@@ -10,7 +10,7 @@ const User = ({ follower }) => {
   const dispatch = useDispatch();
 
   const [following, setFollowing] = useState(followers.includes(user._id));
-  window.REACT_APP_PUBLIC_FOLDER = "http://localhost:5000/images/";
+  const PublicImages = import.meta.env.VITE_PUBLIC_FOLDER;
 
   const handleFollow = () => {
     following
@@ -26,8 +26,8 @@ const User = ({ follower }) => {
           <img
             src={
               avatar
-                ? `${window.REACT_APP_PUBLIC_FOLDER}${avatar}`
-                : window.REACT_APP_PUBLIC_FOLDER + "user.png"
+                ? `${PublicImages}${avatar}`
+                : PublicImages + "user.png"
             }
             alt=""
             className="followerImg"

@@ -21,8 +21,7 @@ const Post = ({ post }) => {
   const [person, setPerson] = useState({});
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-
-  window.REACT_APP_PUBLIC_FOLDER = "http://localhost:5000/images/";
+  const PublicImages = import.meta.env.VITE_PUBLIC_FOLDER;
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -77,8 +76,8 @@ const Post = ({ post }) => {
             <img
               src={
                 person.avatar
-                  ? `${window.REACT_APP_PUBLIC_FOLDER}${person.avatar}`
-                  : window.REACT_APP_PUBLIC_FOLDER + "user.png"
+                  ? `${PublicImages}${person.avatar}`
+                  : PublicImages + "user.png"
               }
               alt=""
               className="followerImg"
@@ -92,7 +91,7 @@ const Post = ({ post }) => {
         {user._id === userId ? <GrClose onClick={handleDelete} /> : ""}
       </div>
       {image ? (
-        <img src={`${window.REACT_APP_PUBLIC_FOLDER}${image}`} alt="Image" />
+        <img src={`${PublicImages}${image}`} alt="Image" />
       ) : (
         ""
       )}

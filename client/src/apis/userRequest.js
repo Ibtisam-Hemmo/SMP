@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: "http://localhost:5000" });
+const API_URL = import.meta.env.VITE_API_URL;
+
+const API = axios.create({ baseURL: API_URL });
 
 export const getUser = (id) => API.get(`/api/v1/user/${id}`);
 export const UpdateUser = (id, formData) => API.put(`/api/v1/user/${id}`, formData);

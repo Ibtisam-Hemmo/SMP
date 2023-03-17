@@ -9,7 +9,7 @@ import "./rightSide.css";
 const NavIcons = () => {
   return (
     <div className="navIcons">
-      <Link to="/home">
+      <Link to="/">
         <HiHome fill="rebeccapurple" />
       </Link>
       <MdOutlineNotificationsActive />

@@ -7,7 +7,7 @@ import { getUser } from "../../apis/userRequest.js";
 import "./chatContainer.css";
 
 const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
-  window.REACT_APP_PUBLIC_FOLDER = "http://localhost:5000/images/";
+  const PublicImages = import.meta.env.VITE_PUBLIC_FOLDER;
 
   const [userData, setUserData] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -87,8 +87,8 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage }) => {
                   <img
                     src={
                       userData?.avatar
-                        ? `${window.REACT_APP_PUBLIC_FOLDER}${userData?.avatar}`
-                        : window.REACT_APP_PUBLIC_FOLDER + "user.png"
+                        ? `${PublicImages}${userData?.avatar}`
+                        : PublicImages + "user.png"
                     }
                     alt="Profile"
                     className="followerImage"
