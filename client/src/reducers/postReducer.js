@@ -7,7 +7,6 @@ const postReducer = (
             return { ...state, loading: true, error: false, uploading: false }
 
         case "SHARE_SUCCESS":
-            localStorage.setItem("posts", JSON.stringify({ ...action?.data }))
             return { ...state, posts: [action.data, ...state.posts], loading: false, error: false, uploading: false }
 
         case "SHARE_FAIL":
