@@ -18,7 +18,7 @@ const login = async (req, res, next) => {
                 const { password, ...otherInfo } = user._doc
                 generateToken(res, payload, otherInfo, next)
             }
-            next(new customError(401, 'password is wrong'));
+            else next(new customError(401, 'password is wrong'));
         }
         else next(new customError(404, 'You are not registered, try to sign up instead'));
     } catch (error) {
